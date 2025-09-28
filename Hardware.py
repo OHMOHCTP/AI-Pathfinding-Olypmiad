@@ -8,7 +8,6 @@ from MCLab.robocar import Robocar
 screen = MCScreen()
 screen.clean_screen()
 screen.set_screen_bg_color(0xFFFFFF)
-V_0 = unit.get(unit.V_FUNCTION, unit.PORTB)
 color_0 = unit.get(unit.COLOR, unit.PORTA)
 
 

@@ -14,7 +14,7 @@ screen.clean_screen()
 screen.set_screen_bg_color(0xFFFFFF)
 color_0 = unit.get(unit.COLOR, unit.PORTA)
 servo_0 = unit.get(unit.SERVO, unit.PORTC)
-servo_1 = unit.get(unit.SERVO, unit.PORTD)
+servo_1 = unit.get(unit.SERVO, unit.PORTB)
 
 class ObjectStatus:
   def __init__(self):

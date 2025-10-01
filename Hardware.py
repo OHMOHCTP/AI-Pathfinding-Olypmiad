@@ -17,6 +17,8 @@ LF3 = None
 LF4 = None
 LF5 = None
 
+
+
 robo = Robocar()
 
 switch0 = MCSwitch(x=0, y=105, w=70, h=30, bg_c=0xCCCCCC, color=0x0288FB, parent=None)
@@ -26,6 +28,16 @@ switch3 = MCSwitch(x=140, y=105, w=70, h=30, bg_c=0xCCCCCC, color=0x0288FB, pare
 switch4 = MCSwitch(x=186, y=105, w=70, h=30, bg_c=0xCCCCCC, color=0x0288FB, parent=None)
 label0 = MCLabel('label0', x=125, y=35, color=0x000, font=FONT_MONT_14, parent=None)
 
+
+
+robo.init_motor_module()
+if not robo.select_lego:
+  robo.encoder4.set_all_motors_mode(0x00)
+def normal_mode():
+  if not robo.select_lego:
+    robo.select_normal_mode()
+    for i in range(4):
+      robo.encoder4.set_motor_pwm_dutycycle(i, 0)
 
 
 
@@ -47,6 +59,12 @@ while True:
     switch1.set_off()
   if LF3:
     switch2.set_on()
+    if LF3 and (not LF4 and not LF2):
+      robo.set_motor_speed(1,1,60)
+      robo.set_motor_speed(2,0,60)
+    else:
+      robo.set_motor_speed(1,1,0)
+      robo.set_motor_speed(1,1,0)
   else:
     switch2.set_off()
   if LF4:

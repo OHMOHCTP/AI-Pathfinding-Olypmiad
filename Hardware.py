@@ -10,6 +10,14 @@ screen.clean_screen()
 screen.set_screen_bg_color(0xFFFFFF)
 color_0 = unit.get(unit.COLOR, unit.PORTA)
 
+def fun__(topic_data):
+  # global params
+  pass
+
+
+mcmqtt = MCmqtt('', '', 1883, '', '', 300)
+mcmqtt.subscribe(str(''), fun__)
+mcmqtt.start()
 
 LF1 = None
 LF2 = None
@@ -43,32 +51,44 @@ def normal_mode():
 
 robo.ow_line_port_init(unit.PORTB)
 robo.ow_multi_line_led(1)
-while True:
-  (LF1, LF2, LF3, LF4, LF5) = robo.ow_multi_line_get_sensor_values()
-  if LF5:
-    switch4.set_on()
-  else:
-    switch4.set_off()
-  if LF1:
-    switch0.set_on()
-  else:
-    switch0.set_off()
-  if LF2:
-    switch1.set_on()
-  else:
-    switch1.set_off()
-  if LF3:
-    switch2.set_on()
-    if LF3 and (not LF4 and not LF2):
-      robo.set_motor_speed(1,1,60)
-      robo.set_motor_speed(2,0,60)
-    else:
-      robo.set_motor_speed(1,1,0)
-      robo.set_motor_speed(1,1,0)
-  else:
-    switch2.set_off()
-  if LF4:
-    switch3.set_on()
-  else:
-    switch3.set_off()
-  wait_ms(2)
+
+def Start():
+    robo.set_motor_speed(1,1,100)
+    robo.set_motor_speed(2, 0, 100)
+    wait_ms(190)
+    WSens1 = 0
+    Bsens = 1
+    Wsens2 = 0
+    while Bsens and not (Wsens2 and WSens1):
+        (LF1, LF2, LF3, LF4, LF5) = robo.ow_multi_line_get_sensor_values()
+
+def Func1():
+    while True:
+      (LF1, LF2, LF3, LF4, LF5) = robo.ow_multi_line_get_sensor_values()
+      if LF5:
+        switch4.set_on()
+      else:
+        switch4.set_off()
+      if LF1:
+        switch0.set_on()
+      else:
+        switch0.set_off()
+      if LF2:
+        switch1.set_on()
+      else:
+        switch1.set_off()
+      if LF3:
+        switch2.set_on()
+        if LF3 and (not LF4 and not LF2):
+          robo.set_motor_speed(1,1,60)
+          robo.set_motor_speed(2,0,60)
+        else:
+          robo.set_motor_speed(1,1,0)
+          robo.set_motor_speed(1,1,0)
+      else:
+        switch2.set_off()
+      if LF4:
+        switch3.set_on()
+      else:
+        switch3.set_off()
+      wait_ms(2)
